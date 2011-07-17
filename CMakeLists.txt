@@ -7,6 +7,8 @@ include(CPack)
 
 option(BUILD_REPORTS "Build Reports." OFF)
 
+add_subdirectory( Testing )
+
 if( BUILD_REPORTS )
   add_subdirectory( Reports )
 endif()
