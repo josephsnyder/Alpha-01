@@ -7,6 +7,8 @@ include(CPack)
 
 option(BUILD_REPORTS "Build Reports." OFF)
 
+file(GLOB_RECURSE M_FILES "*.m")
+
 add_subdirectory( Testing )
 
 if( BUILD_REPORTS )

@@ -10,6 +10,20 @@ ELSE(NOT PDFLATEX_COMPILER)
 FIND_PROGRAM(FIG2DEV_EXECUTABLE NAMES fig2dev)
 
 
+
+#
+#  Copy the .cxx files to the binary build directory
+#  to make easier to source them as code snippets.
+#
+#  This M_FILES variable is populated in the top CMakeLists.txt file
+#
+FILE(
+  COPY  ${M_FILES}
+  DESTINATION ${HowToWriteTechnicalReport_Report_BINARY_DIR}
+  )
+
+
+
 #
 # These are source files needed for the report generation.
 #

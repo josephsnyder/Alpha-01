@@ -26,6 +26,13 @@ colorlinks,linkcolor={blue},citecolor={blue},urlcolor={blue},
 ]{hyperref}
 
 
+\newcommand{\lstlistingwithnumber}[3]{
+\begin{center}
+\lstinputlisting[linerange={#1-#2},firstnumber=#1,numbers=left]{#3}
+\end{center}
+}
+
+
 \title{How to Write an OSEHR Technical Report}
 
 
@@ -117,6 +124,42 @@ A successful OSEHR Technical Report should be such that any reader can download
 the report and its acompanying materials and with minimal effort verify that the
 software works and produce useful results.
 
+\section{Code Walkthrough}
+
+In this hypothetical example, we do a walk throught the source code of the
+contribution with the purpose of highlighting some of the key features in this
+source code piece.
+
+First we say something smart about the first five lines:
+
+\lstlistingwithnumber{1}{5}{program1.m}
+
+That is followed by an explanation of why the next three lines are required:
+
+\lstlistingwithnumber{6}{9}{program1.m}
+
+and conclude with a commentary of the last lines:
+
+\lstlistingwithnumber{10}{14}{program1.m}
+
+
+
+\section{How to use the code}
+
+In this typical section we explain how a typical OSEHR developer can take
+advantage of the contribution described in this technical report.
+
+Using the MUMPS interpreter, this routine can be executed by doing
+
+\begin{verbatim}
+mumps  program1.m
+\end{verbatim}
+
+
+\section{Conclusions}
+
+In the final section we discuss potential improvements to the code, and what
+other uses it could have.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
