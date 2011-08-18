@@ -1,0 +1,6 @@
+#!/bin/sh
+. @GTMPROFILE@
+export gtmgbldir="@VISTA_GLOBALS_DIR@/mumps.gld"
+export gtmroutines="${gtmroutines} @VISTA_ROUTINE_DIR@"
+cd @VISTA_BINARY_DIR@
+ctest -j8 -D Nightly

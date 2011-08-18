@@ -1,0 +1,24 @@
+#!/usr/bin/expect
+spawn gtm -run ^XINDEX
+log_file -noappend /home/joseph/Downloads/WORK/Testing/Temporary/${RFILE}.txt
+
+
+expect "Routine:"
+send "${RFILE}\n"
+expect "Routine:"
+send "\n"
+expect "Select BUILD NAME:"
+send "\n"
+expect "Select PACKAGE NAME:"
+send "\n"
+expect "Print more than compiled errors and warnings? YES//"
+send "N\n"
+expect "Index all called routines? NO//"
+send "\n"
+expect "DEVICE:"
+send "\n"
+send "grep \"S -\" | wc -l"
+expect eof
+
+
+

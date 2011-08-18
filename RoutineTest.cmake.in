@@ -1,0 +1,5 @@
+execute_process(COMMAND expect -f @VISTA_BINARY_DIR@/Testing/@RFILE@.exp )
+file(WRITE @VISTA_BINARY_DIR@/Testing/Temporary/@RFILE@Errors.txt "" )
+
+file(STRINGS @VISTA_BINARY_DIR@/Testing/Temporary/@RFILE@.txt OUTPUT REGEX ^...@RFILE@)
+file(APPEND @VISTA_BINARY_DIR@/Testing/Temporary/@RFILE@Errors.txt "${OUTPUT}\n")
