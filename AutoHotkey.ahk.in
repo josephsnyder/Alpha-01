@@ -1,0 +1,17 @@
+#SingleInstance off
+run C:\InterSystems\TryCache\bin\Ccontrol.exe cterminal TRYCACHE XINDEX VISTA
+WinWait Cache
+send N`r
+send ${FinalRoutine}`r
+send `r
+send `r
+send `r
+send N`r
+send `r
+send `r
+send `r
+
+
+WinWaitClose Cache
+
+
