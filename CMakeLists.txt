@@ -27,7 +27,8 @@ endif()
 		if(nameflag AND totalflag)
 			STRING(STRIP ${FinalRoutine} FinalRoutine)
 			configure_file(${VISTA_SOURCE_DIR}/AutoHotkey.ahk.in ${VISTA_BINARY_DIR}/Testing/${FinalRoutine}.ahk)
-			ADD_TEST(${FinalRoutine}Test ${AutoHK}  ${VISTA_BINARY_DIR}/Testing/${FinalRoutine}.ahk)
+			configure_file(${VISTA_SOURCE_DIR}/WinRoutine.cmake.in ${VISTA_BINARY_DIR}/Testing/${FinalRoutine}.cmake @ONLY)
+			ADD_TEST(${FinalRoutine}Test cmake -P ${VISTA_BINARY_DIR}/Testing/${FinalRoutine}.cmake)
 			set_property(TEST ${FinalRoutine}Test PROPERTY FAIL_REGULAR_EXPRESSION "F -" "W -")
 		ENDIF()
 	ENDFOREACH(Routines ${ListRoutines})
@@ -52,7 +53,6 @@ ENDIF(BUILD_TESTING)
 if( BUILD_REPORTS )
   add_subdirectory( Reports )
 endif()
-
 
 MAKE_DIRECTORY(${VISTA_BIN_DIR}/Testing/Temp/)
 
