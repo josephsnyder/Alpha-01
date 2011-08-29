@@ -3,7 +3,6 @@ WinWait Cache
 send !l
 WinWaitNotActive
 send ${FinalRoutine}`r
-send `r
 send N`r
 send ${FinalRoutine}`r
 send `r
