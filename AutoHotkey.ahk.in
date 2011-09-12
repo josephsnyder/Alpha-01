@@ -1,6 +1,6 @@
 run C:\InterSystems\TryCache\bin\Ccontrol.exe cterminal TRYCACHE XINDEX VISTA
 WinWait Cache
-WinHide Cache
+;WinHide Cache
 send !l
 WinWaitNotActive
 send ${FinalRoutine}`r
@@ -14,5 +14,10 @@ send N`r
 send `r
 send `r
 send `r
+While count<5
+{
+send `r
+count += 1
+}
 WinWait Cache Terminal
 send `r
