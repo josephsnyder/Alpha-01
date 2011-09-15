@@ -1,12 +1,13 @@
+SetTitleMatchMode, 2
 run C:\InterSystems\TryCache\bin\Ccontrol.exe cterminal TRYCACHE XINDEX VISTA
-WinWait Cache
+WinWait, Cache
 ;WinHide Cache
 send !l
 WinWaitNotActive
-send ${FinalRoutine}`r
+send ${VISTA_BINARY_DIR}/Testing/Temporary/${Letter}Test`r
 send `r
 send N`r
-send ${FinalRoutine}`r
+send ${Letter}*`r
 send `r
 send `r
 send `r
@@ -14,10 +15,14 @@ send N`r
 send `r
 send `r
 send `r
-While count<5
+While TRUE
 {
-send `r
-count += 1
+	WinWait,Terminal,,.1
+	if !ErrorLevel
+	{
+	break
+	}
+	send `r	
 }
-WinWait Cache Terminal
+
 send `r

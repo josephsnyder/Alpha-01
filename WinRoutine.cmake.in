@@ -1,6 +1,6 @@
-execute_process(COMMAND "@AutoHK@" @VISTA_BINARY_DIR@/Testing/@FinalRoutine@.ahk )
+execute_process(COMMAND "@AutoHK@" @VISTA_BINARY_DIR@/Testing/@Letter@Test.ahk )
 
-file(STRINGS @Cache_Path@/@FinalRoutine@.log OUTPUT REGEX "F -")
+file(STRINGS @VISTA_BINARY_DIR@/Testing/Temporary/@Letter@Test.log OUTPUT REGEX "F -")
 if(OUTPUT)
 FOREACH(found ${OUTPUT})
 message(${found})
