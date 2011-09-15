@@ -79,6 +79,7 @@ ENDIF()
 configure_file(${VISTA_SOURCE_DIR}/XINDEXscript.exp.in ${VISTA_BINARY_DIR}/Testing/${RFILE}.exp)											#Configures the Expect script with the name of the routine
 configure_file(${VISTA_SOURCE_DIR}/RoutineTest.cmake.in ${VISTA_BINARY_DIR}/Testing/${RFILE}.cmake @ONLY)									#Configures the CMake file to be called by the correct test and call the correct script
 ADD_TEST( ${RFILE}Test cmake -P ${VISTA_BINARY_DIR}/Testing/${RFILE}.cmake)																	#Adds the test to the list available
-set_property(TEST ${RFILE}Test PROPERTY FAIL_REGULAR_EXPRESSION "F -" "W -")																#Sets the failure conditions for the test, if either is found in the output the test is deemed to have failed.
+set_property(TEST ${RFILE}Test PROPERTY FAIL_REGULAR_EXPRESSION "${FAILURE_CONDITIONS}")																#Sets the failure conditions for the test, if either is found in the output the test is deemed to have failed.
 ENDFOREACH()
-endif(gtmprofile)
+configure_file(${VISTA_SOURCE_DIR}/Nightly.sh.in ${VISTA_BINARY_DIR}/Nightly.sh)
+endif(GTMPROFILE)
