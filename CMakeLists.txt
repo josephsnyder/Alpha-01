@@ -11,9 +11,7 @@ mark_as_advanced(WARNING_FAILURE)
 FIND_PROGRAM(CControl NAMES Ccontrol.exe HINTS "C:/InterSystems/TryCache/bin/" DOC "Path to the Ccontrol executable of Cache")
 FIND_FILE(GTMPROFILE NAMES gtmprofile DOC "Path to the GTM Profile")
 
-
 SET(FAILURE_CONDITIONS "F -" "W -")
-message(${FAILURE_CONDITIONS})
 IF(CControl)   																																#If CControl is found, the Cache system and paths are used
 IF(BUILD_TESTING)  																															# Creates the Testing/Temporary/ directories used in CTest if the optino is selected 
 	ENABLE_TESTING()
@@ -24,7 +22,7 @@ if( BUILD_REPORTS )																															# Creates the reports folder w
   add_subdirectory( Reports )
 endif()
 	
-	FIND_PROGRAM(AutoHK NAMES AutoHotKey.exe)																								#AutoHotKey is our Windows Driver to automate the XINDEX routine
+	FIND_PROGRAM(AutoHK NAMES AutoHotKey.exe DOC "Path to the executable for AutoHotKey")																								#AutoHotKey is our Windows Driver to automate the XINDEX routine
 	FIND_PATH(VISTA_Path NAMES mgr DOC "Path to the VistA folder within Cache")
 	if(0)
 	#execute_process(COMMAND  ${AutoHK}  ${VISTA_SOURCE_DIR}/Routineslist.ahk)																#Calls the RD routine to print out the listing of the routines contained in the cache.dat
