@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.0)
 
-PROJECT(VISTA)
+PROJECT(VISTA NONE)
 
 OPTION(BUILD_TESTING "Test the project" ON)																								#Options that will show up on the CMake Gui that allows customization of the project
 OPTION(BUILD_REPORTS "Build Reports." OFF)
