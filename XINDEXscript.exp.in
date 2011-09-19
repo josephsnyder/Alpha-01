@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 spawn gtm -run ^XINDEX
-log_file -noappend /home/joseph/Downloads/WORK/Testing/Temporary/${RFILE}.txt
+log_file -noappend ${VISTA_BINARY_DIR}/Testing/Temporary/${RFILE}.txt
 expect "Routine:"
 send "${RFILE}\n"
 expect "Routine:"
@@ -16,8 +16,7 @@ send "\n"
 expect "DEVICE:"
 send "\n"
 set count 1;
-while {$count <5}
-{ 
+while {$count <5} { 
 expect "   Press return to continue:" {send "\n"}\
 expect "DEVICE:      " { abort }\
 expect "Do you want your output QUEUED? NO//" { abort }
