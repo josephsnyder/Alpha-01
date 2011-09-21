@@ -79,5 +79,5 @@ configure_file(${VISTA_SOURCE_DIR}/RoutineTest.cmake.in ${VISTA_BINARY_DIR}/Test
 ADD_TEST( ${RFILE}Test cmake -P ${VISTA_BINARY_DIR}/Testing/${RFILE}.cmake)																	#Adds the test to the list available
 set_property(TEST ${RFILE}Test PROPERTY FAIL_REGULAR_EXPRESSION "${FAILURE_CONDITIONS}")																#Sets the failure conditions for the test, if either is found in the output the test is deemed to have failed.
 ENDFOREACH()
-configure_file(${VISTA_SOURCE_DIR}/Nightly.sh.in ${VISTA_BINARY_DIR}/Nightly.sh)
+configure_file(${VISTA_SOURCE_DIR}/Nightly.sh.in ${VISTA_BINARY_DIR}/Nightly.sh @ONLY)
 endif(GTMPROFILE)
