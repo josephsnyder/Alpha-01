@@ -71,6 +71,7 @@ FIND_PROGRAM(EXPECT_EXEC NAMES expect)																										#Finds the scrip
 
 FIND_PATH (VISTA_ROUTINE_DIR NAMES Routines HINTS ${VISTA_SOURCE_DIR}/routines DOC "Path to the Routines folder within GT.M")				#Creates variables for the routines and globals directorys within GT.M
 FIND_PATH (VISTA_GLOBALS_DIR NAMES Globals HINTS ${VISTA_SOURCE_DIR}/globals DOC " Path to the Globals folder within GT.M")
+configure_file(${VISTA_SOURCE_DIR}/GTMEnvironment.sh.in ${VISTA_BINARY_DIR}/GTMEnvironment.sh @ONLY)											#Configures the Expect script with the name of the routine
 
 IF(BUILD_TESTING)																															# Creates the Testing/Temporary/ directories used in CTest if the option is selected 
 	ENABLE_TESTING()
