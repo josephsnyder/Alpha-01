@@ -59,9 +59,9 @@ endif()
 	ENDFOREACH(Routines ${ListRoutines})
 	ENDIF(0)
 	FOREACH( Letter A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)																	#Calls the routines by the first letter of the name
-	configure_file(${VISTA_SOURCE_DIR}/AutoHotkey.ahk.in ${VISTA_BINARY_DIR}/Testing/${Letter}Test.ahk)										#Configures the AHK script for testing, by replacing known variables in the .in file
+	configure_file(${VISTA_SOURCE_DIR}/CacheXINDEXScript.ahk.in ${VISTA_BINARY_DIR}/Testing/${Letter}Test.ahk)										#Configures the AHK script for testing, by replacing known variables in the .in file
 	configure_file(${VISTA_SOURCE_DIR}/WinRoutine.cmake.in ${VISTA_BINARY_DIR}/Testing/${Letter}Test.cmake @ONLY)							#Configures the CMAKE testing 
-	ADD_TEST(${Letter}Test cmake -P ${VISTA_BINARY_DIR}/Testing/${Letter}Test.cmake) 
+	ADD_TEST(${Letter}Test ${CMAKE_COMMAND} -P ${VISTA_BINARY_DIR}/Testing/${Letter}Test.cmake) 
 	set_property(TEST ${Letter}Test PROPERTY FAIL_REGULAR_EXPRESSION "${FAILURE_CONDITIONS}" )	
 	ENDFOREACH()
 	return()
@@ -93,7 +93,7 @@ ENDIF()
 
 configure_file(${VISTA_SOURCE_DIR}/XINDEXscript.exp.in ${VISTA_BINARY_DIR}/Testing/${RFILE}.exp)											#Configures the Expect script with the name of the routine
 configure_file(${VISTA_SOURCE_DIR}/RoutineTest.cmake.in ${VISTA_BINARY_DIR}/Testing/${RFILE}.cmake @ONLY)									#Configures the CMake file to be called by the correct test and call the correct script
-ADD_TEST( ${RFILE}Test cmake -P ${VISTA_BINARY_DIR}/Testing/${RFILE}.cmake)																	#Adds the test to the list available
+ADD_TEST( ${RFILE}Test ${CMAKE_COMMAND} -P ${VISTA_BINARY_DIR}/Testing/${RFILE}.cmake)																	#Adds the test to the list available
 set_property(TEST ${RFILE}Test PROPERTY FAIL_REGULAR_EXPRESSION "${FAILURE_CONDITIONS}")																#Sets the failure conditions for the test, if either is found in the output the test is deemed to have failed.
 ENDFOREACH()
 configure_file(${VISTA_SOURCE_DIR}/Nightly.sh.in ${VISTA_BINARY_DIR}/Nightly.sh @ONLY)
