@@ -54,6 +54,10 @@ endif()
     get_filename_component(TEMP ${VISTA_Path} PATH)
     get_filename_component(TEMP ${TEMP} PATH)
     get_filename_component(SERVER ${TEMP} NAME)
+    if (${SERVER} EQUAL "Cache" ) 
+    set(SERVER ${SERVER}Web)
+    ENDIF()
+
 	
 	
 	#Calls the routines by the first letter of the name
