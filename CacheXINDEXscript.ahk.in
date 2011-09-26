@@ -15,7 +15,7 @@
 ;---------------------------------------------------------------------------
 
 SetTitleMatchMode, 2
-run C:\InterSystems\TryCache\bin\Ccontrol.exe cterminal TRYCACHE XINDEX VISTA
+run ${CControl} cterminal ${SERVER} XINDEX ${INSTANCE}
 WinWait, Cache
 ;WinHide Cache
 send !l
