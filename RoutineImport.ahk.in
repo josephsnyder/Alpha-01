@@ -1,0 +1,12 @@
+run "${CControl}" cterminal ${SERVER} `%RI ${INSTANCE}
+WinWait Cache
+send ${OSEHRA_PATH}\routines.ro`r
+send `r
+send Y`r
+send `r
+send All`r
+send Yes`r
+send `r
+send `r
+WinWait Cache
+WinWaitClose

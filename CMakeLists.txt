@@ -36,51 +36,64 @@ set(FAILURE_CONDITIONS "F -" "W -")
 #if CControl is found, the Cache system and paths are used
 if(CControl)
 
-# Creates the Testing/Temporary/ directories used in CTest if the optino is selected 
-if(BUILD_TESTING)
+  find_program(AutoHK NAMES AutoHotKey.exe DOC "Path to the executable for AutoHotKey")                                                                                                #AutoHotKey is our Windows Driver to automate the XINDEX routine
+  find_path(VISTA_Path NAMES mgr DOC "Path to the VistA folder within Cache")
+
+  # Creates the Testing/Temporary/ directories used in CTest if the optino is selected 
+  if(BUILD_TESTING)
     enable_testing()
     include(CTest)
-endif(BUILD_TESTING)
+  endif(BUILD_TESTING)
 
+  # Creates the reports folder with style guides for submitting to the OSEHR journal if the option is selected
+  if( BUILD_REPORTS )
+    add_subdirectory( Reports )
+  endif()
 
-# Creates the reports folder with style guides for submitting to the OSEHR journal if the option is selected
-if( BUILD_REPORTS )
-  add_subdirectory( Reports )
-endif()
-    
-    find_program(AutoHK NAMES AutoHotKey.exe DOC "Path to the executable for AutoHotKey")                                                                                                #AutoHotKey is our Windows Driver to automate the XINDEX routine
-    find_path(VISTA_Path NAMES mgr DOC "Path to the VistA folder within Cache")
-    
-    #Captures the name of the VistA instance and server for configuring.
-    get_filename_component(INSTANCE ${VISTA_Path} NAME)
-    get_filename_component(TEMP ${VISTA_Path} PATH)
-    get_filename_component(TEMP ${TEMP} PATH)
-    get_filename_component(SERVER ${TEMP} NAME)
-    string(COMPARE EQUAL ${SERVER} "Cache" match)
-    if (match ) 
+  #Captures the name of the VistA instance and server for configuring.
+  get_filename_component(INSTANCE ${VISTA_Path} NAME)
+  get_filename_component(TEMP ${VISTA_Path} PATH)
+  get_filename_component(TEMP ${TEMP} PATH)
+  get_filename_component(SERVER ${TEMP} NAME)
+  string(COMPARE EQUAL ${SERVER} "Cache" match)
+  if (match ) 
     set(SERVER ${SERVER}Web)
-    endif()
+  endif()
+  
+  OPTION(CLEAN_CACHE "Overwrite the Cache.dat file during build phase of testing? To remove this option, delete the CMake Cache" OFF)
+  
+  IF(CLEAN_CACHE)
+    find_program(GIT_EXEC NAMES git.exe HINTS "C:\Program Files (x86)\Git\bin\" DOC "Path to the Git Executable")
+    find_program(PYTHON_EXEC NAMES python.exe "C:\Python27\bin" DOC "Path to the Python Executable")
+    find_path(OSEHRA_PATH NAMES VistA-FOIA DOC "Path to the folder that contains the routines and globals from OSEHRA")
+    configure_file(${VISTA_SOURCE_DIR}/ImportRG.cmake.in ${VISTA_BINARY_DIR}/ImportRG.cmake)
+    configure_file(${VISTA_SOURCE_DIR}/RoutineImport.ahk.in ${VISTA_BINARY_DIR}/RoutineImport.ahk)
+    configure_file(${VISTA_SOURCE_DIR}/GlobalImport.ahk.in ${VISTA_BINARY_DIR}/GlobalImport.ahk)
+    configure_file(${VISTA_SOURCE_DIR}/Initialize.ahk.in ${VISTA_BINARY_DIR}/Initialize.ahk)
+    SET(MAKECOMMAND " cmake -P ${VISTA_BINARY_DIR}/ImportRG.cmake" CACHE STRING "Import Routines and Globals into CACHE as Build Step" FORCE)
+  ELSE()
+  SET(MAKECOMMAND "NULLCOMMAND" CACHE STRING "NO BUILD" FORCE)
+  ENDIF()
 
-	
-	
-	#Calls the routines by the first letter of the name
-    foreach( Letter A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)
-	
-	#Configures the AHK script for testing, by replacing known variables in the .in file
-    configure_file(${VISTA_SOURCE_DIR}/CacheXINDEXScript.ahk.in ${VISTA_BINARY_DIR}/Testing/${Letter}Test.ahk)
-	
-	#Configures the CMAKE testing 
-    configure_file(${VISTA_SOURCE_DIR}/WinRoutine.cmake.in ${VISTA_BINARY_DIR}/Testing/${Letter}Test.cmake @ONLY)                            
     
-	#Creates the command that will be called for the Test
-	add_test(${Letter}Test ${CMAKE_COMMAND} -P ${VISTA_BINARY_DIR}/Testing/${Letter}Test.cmake) 
-	
-	#Sets a custom failure condition so that the test will fail if "W -" or "F -" is found in the test output
+    
+  #Calls the routines by the first letter of the name
+  foreach( Letter A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)
+    #Configures the AHK script for testing, by replacing known variables in the .in file
+    configure_file(${VISTA_SOURCE_DIR}/CacheXINDEXScript.ahk.in ${VISTA_BINARY_DIR}/Testing/${Letter}Test.ahk)
+    
+    #Configures the CMAKE testing 
+    configure_file(${VISTA_SOURCE_DIR}/WinRoutine.cmake.in ${VISTA_BINARY_DIR}/Testing/${Letter}Test.cmake @ONLY)                            
+      
+    #Creates the command that will be called for the Test
+    add_test(${Letter}Test ${CMAKE_COMMAND} -P ${VISTA_BINARY_DIR}/Testing/${Letter}Test.cmake) 
+    
+    #Sets a custom failure condition so that the test will fail if "W -" or "F -" is found in the test output
     set_property(TEST ${Letter}Test PROPERTY FAIL_REGULAR_EXPRESSION "${FAILURE_CONDITIONS}" )    
-    endforeach()
+  endforeach()
 
-	#end the program
-    return()
+  #end the program
+  return()
 endif(CControl)
 
 

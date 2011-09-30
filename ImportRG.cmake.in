@@ -1,0 +1,8 @@
+execute_process( COMMAND "${CControl}" stop ${SERVER})
+file(COPY ${OSEHRA_PATH}/cache.dat DESTINATION ${VISTA_Path})
+execute_process(COMMAND "${CControl}" start ${SERVER})
+execute_process(COMMAND git ls-files "*.m" COMMAND python Scripts/PackRO.py WORKING_DIRECTORY ${OSEHRA_PATH} OUTPUT_FILE routines.ro)
+execute_process(COMMAND git ls-files "*.zwr" WORKING_DIRECTORY ${OSEHRA_PATH} OUTPUT_FILE globals.lst)
+execute_process(COMMAND "${AutoHK}" ${VISTA_BINARY_DIR}/RoutineImport.ahk)
+execute_process(COMMAND "${AutoHK}" ${VISTA_BINARY_DIR}/GlobalImport.ahk)
+execute_process(COMMAND "${AutoHK}" ${VISTA_BINARY_DIR}/Initialize.ahk)

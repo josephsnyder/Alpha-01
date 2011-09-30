@@ -1,0 +1,8 @@
+run "${CControl}" cterminal ${SERVER}
+WinWait Cache
+SendInput {RAW}D ^`%CD`r
+send ${INSTANCE}`r
+SendInput {RAW}D LIST`^ZGI("${OSEHRA_PATH}\globals.lst","${OSEHRA_PATH}\")`r
+send h`r
+WinWait Cache
+WinWaitClose

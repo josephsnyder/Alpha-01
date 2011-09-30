@@ -1,0 +1,27 @@
+SendMode Input
+run "${CControl}" cterminal ${SERVER}
+WinWait Cache
+SendInput {RAW}D ^`%CD`r
+send ${INSTANCE}`r
+SendInput {RAW}K ^`%ZOSF("UCI")`r
+SendInput {RAW}D ^ZTMGRSET`r
+send Y`r
+send `r
+send `r
+send `r
+send `r
+send Y`r
+send S DUZ=1`r
+send {RAW}D Q`^DI`r
+send 1`r
+send DEVICE`r
+send {RAW}$I`r
+send `r
+send TELNET`r
+send 1`r
+send {RAW}|TRM|`r
+send `r
+send `r
+send h`r
+WinWait Cache
+WinWaitClose

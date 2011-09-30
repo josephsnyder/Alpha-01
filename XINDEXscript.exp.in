@@ -1,3 +1,4 @@
+#!/usr/bin/env expect
 #---------------------------------------------------------------------------
 # Copyright 2011 The Open Source Electronic Health Record Agent
 #
@@ -14,8 +15,6 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-
-#!/usr/bin/expect
 spawn gtm -run ^XINDEX
 log_file -noappend ${VISTA_BINARY_DIR}/Testing/Temporary/${RFILE}.txt
 expect "Routine:"

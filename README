@@ -1,8 +1,6 @@
-First Alpha-01 version of experimental repository.
+OSEHRA Automated Testing
 
-The content of this repository is publicly distributed under the
+This project provides tools to perform automatic testing of a VistA
+instance running under a GT.M or InterSystems Cache environment.
 
-                  Apache 2.0 License
-
-See the LICENSE file for full details.
-
+Please visit http://osehra.org for more information.

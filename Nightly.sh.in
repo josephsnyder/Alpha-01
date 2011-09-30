@@ -1,3 +1,4 @@
+#!/bin/sh
 #---------------------------------------------------------------------------
 # Copyright 2011 The Open Source Electronic Health Record Agent
 #
@@ -14,9 +15,9 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-#!/bin/sh
 . @GTMPROFILE@
-export gtmgbldir="@VISTA_GLOBALS_DIR@/mumps.gld"
-export gtmroutines="${gtmroutines} @VISTA_ROUTINE_DIR@"
+gtmgbldir="@VISTA_GLOBALS_DIR@/mumps.gld"
+gtmroutines="${gtmroutines} @VISTA_ROUTINE_DIR@"
+export gtmgbldir gtmroutines
 cd @VISTA_BINARY_DIR@
 ctest -j8 -D Nightly
